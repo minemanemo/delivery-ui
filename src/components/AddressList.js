@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import NoDataBox from 'components/NoDataBox';
 
 import media from 'util/media';
 
@@ -36,24 +37,29 @@ const CreateListItem = (list, base) => {
   });
 };
 
-const AddressList = ({ addresses, base, more, onCLickMoreBtn }) => {
+const CreateList = (addresses, base, more, onClickMoreBtn) => {
   const first = addresses.find((address) => address.id === base);
   const least = addresses.filter((address) => address.id !== base);
 
+  if (addresses.length === 0) return <NoDataBox />;
   return (
-    <Wrapper>
+    <>
       {CreateListItem([first, ...least.slice(0, more * 5 - 1)], base)}
       {more * 5 - 1 <= addresses.length && (
-        <MoreItem title="더보기" onCLickMoreBtn={onCLickMoreBtn} />
+        <MoreItem title="더보기" onCLickMoreBtn={onClickMoreBtn} />
       )}
-    </Wrapper>
+    </>
   );
+};
+
+const AddressList = ({ addresses, base, more, onClickMoreBtn }) => {
+  return <Wrapper>{CreateList(addresses, base, more, onClickMoreBtn)}</Wrapper>;
 };
 AddressList.propTypes = {
   addresses: PropTypes.arrayOf(PropTypes.object),
   base: PropTypes.number.isRequired,
   more: PropTypes.number.isRequired,
-  onCLickMoreBtn: PropTypes.func.isRequired,
+  onClickMoreBtn: PropTypes.func.isRequired,
 };
 AddressList.defaultProps = {
   addresses: [],

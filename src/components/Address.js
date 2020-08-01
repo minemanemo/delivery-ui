@@ -221,7 +221,7 @@ class Address extends Component {
             addresses={addresses}
             base={defaultAddressID}
             more={more}
-            onCLickMoreBtn={changeMore}
+            onClickMoreBtn={changeMore}
           />
           <MostQuestion />
         </Contents>
