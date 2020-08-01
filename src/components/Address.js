@@ -199,11 +199,17 @@ class Address extends Component {
       },
     ],
     defaultAddressID: 12382726390,
-    more: false,
+    more: 1,
+  };
+
+  changeMore = () => {
+    const { more } = this.state;
+    this.setState({ more: more + 1 });
   };
 
   render() {
     const { addresses, defaultAddressID, more } = this.state;
+    const { changeMore } = this;
     return (
       <Wrapper>
         <ToolBox>
@@ -215,6 +221,7 @@ class Address extends Component {
             addresses={addresses}
             base={defaultAddressID}
             more={more}
+            onCLickMoreBtn={changeMore}
           />
           <MostQuestion />
         </Contents>

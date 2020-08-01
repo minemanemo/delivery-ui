@@ -73,8 +73,19 @@ const Menu = styled.div`
   }
 `;
 
-const MoreItem = () => {
-  return <Wrapper more>더보기</Wrapper>;
+const MoreItem = ({ title, onCLickMoreBtn }) => {
+  return (
+    <Wrapper more onClick={onCLickMoreBtn}>
+      {title}
+    </Wrapper>
+  );
+};
+MoreItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  onCLickMoreBtn: PropTypes.func,
+};
+MoreItem.defaultProps = {
+  onCLickMoreBtn: () => console.warn('more button click is not develop'),
 };
 
 const AddressItem = ({ postnumber, address, isbase }) => {

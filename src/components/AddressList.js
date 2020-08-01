@@ -36,20 +36,24 @@ const CreateListItem = (list, base) => {
   });
 };
 
-const AddressList = ({ addresses, base, more }) => {
+const AddressList = ({ addresses, base, more, onCLickMoreBtn }) => {
   const first = addresses.find((address) => address.id === base);
   const least = addresses.filter((address) => address.id !== base);
+
   return (
     <Wrapper>
-      {CreateListItem([first, ...least.slice(0, 4)], base)}
-      {more ? CreateListItem(least.slice(5, least.length)) : <MoreItem />}
+      {CreateListItem([first, ...least.slice(0, more * 5 - 1)], base)}
+      {more * 5 - 1 <= addresses.length && (
+        <MoreItem title="더보기" onCLickMoreBtn={onCLickMoreBtn} />
+      )}
     </Wrapper>
   );
 };
 AddressList.propTypes = {
   addresses: PropTypes.arrayOf(PropTypes.object),
   base: PropTypes.number.isRequired,
-  more: PropTypes.bool.isRequired,
+  more: PropTypes.number.isRequired,
+  onCLickMoreBtn: PropTypes.func.isRequired,
 };
 AddressList.defaultProps = {
   addresses: [],
