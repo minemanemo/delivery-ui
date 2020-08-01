@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from 'components/Header';
+import DivisionLine from 'components/DivisionLine';
 import TabNavigator from 'components/TabNavigator';
 import TabItem from 'components/TabItem';
 
@@ -19,27 +20,30 @@ class App extends Component {
     ],
   };
 
-  render() {
+  createTabItem = () => {
     const { path } = this.state;
+    return path.map((item) => (
+      <TabItem key={item.path} path={item.path}>
+        {item.name}
+      </TabItem>
+    ));
+  };
+  createRoute = () => {
+    const { path } = this.state;
+    return path.map((item) => (
+      <Route key={item.path} path={item.path} component={item.component} />
+    ));
+  };
+
+  render() {
+    const { createTabItem, createRoute } = this;
     return (
       <div>
         <BrowserRouter>
-          <Header title="설정">
-            <TabNavigator>
-              {path.map((item) => (
-                <TabItem key={item.path} path={item.path}>
-                  {item.name}
-                </TabItem>
-              ))}
-            </TabNavigator>
-          </Header>
-          {path.map((item) => (
-            <Route
-              key={item.path}
-              path={item.path}
-              component={item.component}
-            />
-          ))}
+          <Header title="설정" />
+          <TabNavigator>{createTabItem()}</TabNavigator>
+          <DivisionLine />
+          {createRoute()}
         </BrowserRouter>
       </div>
     );

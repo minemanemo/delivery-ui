@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 
+import media from 'util/media';
+
 const Wrapper = styled.div`
   font-size: 20px;
   color: #999999;
   padding: 0 4px 8px 4px;
-  text-decoration: none;
 
   ${(props) =>
     props.selected
@@ -19,17 +20,13 @@ const Wrapper = styled.div`
     color: #3e3e3e;
   }
 
-  :not(:last-child) {
-    margin-right: 7px;
-  }
-
-  @media all and (min-width: 768px) and (max-width: 1024px) {
+  ${media.tablet`
     margin-right: 27px;
-  }
+  `}
 
-  @media all and (min-width: 1025px) {
+  ${media.desktop`
     margin-right: 27px;
-  }
+  `}
 `;
 
 const TabItem = ({ children, path }) => {
@@ -47,7 +44,5 @@ TabItem.propTypes = {
   children: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
 };
-
-TabItem.defaultProps = {};
 
 export default TabItem;
