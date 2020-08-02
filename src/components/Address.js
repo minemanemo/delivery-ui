@@ -4,6 +4,7 @@ import media from 'util/media';
 
 import AddressList from 'components/AddressList';
 import MostQuestion from 'components/MostQuestion';
+import Dimmed from 'components/Dimmed';
 
 const Wrapper = styled.div`
   ${media.wrapper}
@@ -200,6 +201,18 @@ class Address extends Component {
     ],
     defaultAddressID: 12382726390,
     more: 1,
+    modal: {
+      visible: false,
+    },
+  };
+
+  modalHandler = {
+    show: () => {
+      this.setState({ modal: { visible: true } });
+    },
+    hide: () => {
+      this.setState({ modal: { visible: false } });
+    },
   };
 
   changeMore = () => {
@@ -208,7 +221,7 @@ class Address extends Component {
   };
 
   render() {
-    const { addresses, defaultAddressID, more } = this.state;
+    const { addresses, defaultAddressID, more, modal } = this.state;
     const { changeMore } = this;
     return (
       <Wrapper>
@@ -225,6 +238,7 @@ class Address extends Component {
           />
           <MostQuestion />
         </Contents>
+        <Dimmed visible={modal.visible} />
       </Wrapper>
     );
   }
