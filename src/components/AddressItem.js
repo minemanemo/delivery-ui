@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import media from 'util/media';
 import { MdMoreHoriz } from 'react-icons/md';
+
+import AddressItemMenu from 'components/AddressItemMenu';
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,7 +62,8 @@ const Address = styled.div`
   color: #989898;
 `;
 
-const Menu = styled.div`
+const MenuBtn = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,19 +88,24 @@ MoreItem.propTypes = {
   onCLickMoreBtn: PropTypes.func,
 };
 MoreItem.defaultProps = {
-  onCLickMoreBtn: () => console.warn('more button click is not develop'),
+  onCLickMoreBtn: () => console.warn('[x] more button click'),
 };
 
 const AddressItem = ({ postnumber, address, isbase }) => {
+  const [menuVisible, setMenuVisible] = useState(false);
   return (
     <Wrapper>
       <Information>
         <PostNumber isbase={isbase}>{postnumber}</PostNumber>
         <Address>{address}</Address>
       </Information>
-      <Menu>
-        <MdMoreHoriz />
-      </Menu>
+      <MenuBtn>
+        <MdMoreHoriz onClick={() => setMenuVisible(true)} />
+        <AddressItemMenu
+          visible={menuVisible}
+          hideMenu={() => setMenuVisible(false)}
+        />
+      </MenuBtn>
     </Wrapper>
   );
 };

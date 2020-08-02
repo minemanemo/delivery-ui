@@ -38,14 +38,12 @@ class App extends Component {
   render() {
     const { createTabItem, createRoute } = this;
     return (
-      <div>
-        <BrowserRouter>
-          <Header title="설정" />
-          <TabNavigator>{createTabItem()}</TabNavigator>
-          <DivisionLine />
-          {createRoute()}
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Header title="설정" />
+        <TabNavigator>{createTabItem()}</TabNavigator>
+        <DivisionLine />
+        {createRoute()}
+      </BrowserRouter>
     );
   }
 }
