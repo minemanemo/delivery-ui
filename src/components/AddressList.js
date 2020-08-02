@@ -22,29 +22,41 @@ const Wrapper = styled.div`
   `}
 `;
 
-const CreateListItem = (list, base) => {
+const CreateListItem = (list, base, updateDefaultAddress) => {
   return list.map((item) => {
-    const { id, postnumber, address } = item;
-    // const { name } = item;
+    const { id, name, postnumber, address } = item;
     return (
       <AddressItem
         key={id}
+        id={id}
+        name={name}
         postnumber={postnumber}
         address={address}
         isbase={id === base}
+        updateDefaultAddress={updateDefaultAddress}
       />
     );
   });
 };
 
-const CreateList = (addresses, base, more, onClickMoreBtn) => {
+const CreateList = (
+  addresses,
+  base,
+  more,
+  onClickMoreBtn,
+  updateDefaultAddress,
+) => {
   const first = addresses.find((address) => address.id === base);
   const least = addresses.filter((address) => address.id !== base);
 
   if (addresses.length === 0) return <NoDataBox />;
   return (
     <>
-      {CreateListItem([first, ...least.slice(0, more * 5 - 1)], base)}
+      {CreateListItem(
+        [first, ...least.slice(0, more * 5 - 1)],
+        base,
+        updateDefaultAddress,
+      )}
       {more * 5 - 1 <= addresses.length && (
         <MoreItem title="더보기" onCLickMoreBtn={onClickMoreBtn} />
       )}
@@ -52,17 +64,29 @@ const CreateList = (addresses, base, more, onClickMoreBtn) => {
   );
 };
 
-const AddressList = ({ addresses, base, more, onClickMoreBtn }) => {
-  return <Wrapper>{CreateList(addresses, base, more, onClickMoreBtn)}</Wrapper>;
+const AddressList = ({
+  addresses,
+  base,
+  more,
+  onClickMoreBtn,
+  updateDefaultAddress,
+}) => {
+  return (
+    <Wrapper>
+      {CreateList(addresses, base, more, onClickMoreBtn, updateDefaultAddress)}
+    </Wrapper>
+  );
 };
 AddressList.propTypes = {
   addresses: PropTypes.arrayOf(PropTypes.object),
   base: PropTypes.number.isRequired,
   more: PropTypes.number.isRequired,
   onClickMoreBtn: PropTypes.func.isRequired,
+  updateDefaultAddress: PropTypes.func,
 };
 AddressList.defaultProps = {
   addresses: [],
+  updateDefaultAddress: () => console.warn('[x] update default address'),
 };
 
 export default AddressList;

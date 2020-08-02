@@ -91,7 +91,14 @@ MoreItem.defaultProps = {
   onCLickMoreBtn: () => console.warn('[x] more button click'),
 };
 
-const AddressItem = ({ postnumber, address, isbase }) => {
+const AddressItem = ({
+  id,
+  name,
+  postnumber,
+  address,
+  isbase,
+  updateDefaultAddress,
+}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   return (
     <Wrapper>
@@ -102,17 +109,23 @@ const AddressItem = ({ postnumber, address, isbase }) => {
       <MenuBtn>
         <MdMoreHoriz onClick={() => setMenuVisible(true)} />
         <AddressItemMenu
+          id={id}
+          name={name}
           visible={menuVisible}
           hideMenu={() => setMenuVisible(false)}
+          updateAddress={updateDefaultAddress}
         />
       </MenuBtn>
     </Wrapper>
   );
 };
 AddressItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
   postnumber: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
   isbase: PropTypes.bool.isRequired,
+  updateDefaultAddress: PropTypes.func.isRequired,
 };
 
 export { AddressItem, MoreItem };
