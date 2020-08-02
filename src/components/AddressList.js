@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   `}
 `;
 
-const CreateListItem = (list, base, updateDefaultAddress) => {
+const CreateListItem = (list, base, updateDefaultAddress, deleteAddress) => {
   return list.map((item) => {
     const { id, name, postnumber, address } = item;
     return (
@@ -34,6 +34,7 @@ const CreateListItem = (list, base, updateDefaultAddress) => {
         address={address}
         isbase={id === base}
         updateDefaultAddress={updateDefaultAddress}
+        deleteAddress={deleteAddress}
       />
     );
   });
@@ -45,6 +46,7 @@ const CreateList = (
   more,
   onClickMoreBtn,
   updateDefaultAddress,
+  deleteAddress,
 ) => {
   const first = addresses.find((address) => address.id === base);
   const least = addresses.filter((address) => address.id !== base);
@@ -56,6 +58,7 @@ const CreateList = (
         [first, ...least.slice(0, more * 5 - 1)],
         base,
         updateDefaultAddress,
+        deleteAddress,
       )}
       {more * 5 - 1 <= addresses.length && (
         <MoreItem title="더보기" onCLickMoreBtn={onClickMoreBtn} />
@@ -70,10 +73,18 @@ const AddressList = ({
   more,
   onClickMoreBtn,
   updateDefaultAddress,
+  deleteAddress,
 }) => {
   return (
     <Wrapper>
-      {CreateList(addresses, base, more, onClickMoreBtn, updateDefaultAddress)}
+      {CreateList(
+        addresses,
+        base,
+        more,
+        onClickMoreBtn,
+        updateDefaultAddress,
+        deleteAddress,
+      )}
     </Wrapper>
   );
 };
@@ -83,10 +94,12 @@ AddressList.propTypes = {
   more: PropTypes.number.isRequired,
   onClickMoreBtn: PropTypes.func.isRequired,
   updateDefaultAddress: PropTypes.func,
+  deleteAddress: PropTypes.func,
 };
 AddressList.defaultProps = {
   addresses: [],
   updateDefaultAddress: () => console.warn('[x] update default address'),
+  deleteAddress: () => console.warn('[x] delete address'),
 };
 
 export default AddressList;

@@ -34,15 +34,21 @@ class AddressItemMenu extends Component {
     hideMenu();
   };
 
+  deleteAddress = () => {
+    const { id, deleteAddress, hideMenu } = this.props;
+    deleteAddress(id);
+    hideMenu();
+  };
+
   render() {
-    const { visible, deleteAddress } = this.props;
-    const { updateDefaultAddress } = this;
+    const { visible } = this.props;
+    const { updateDefaultAddress, deleteAddress } = this;
     return (
       <>
         {visible && (
           <Menu>
             <MenuItem onClick={updateDefaultAddress}>기본 배송지 설정</MenuItem>
-            <MenuItem onClick={() => deleteAddress()}>삭제</MenuItem>
+            <MenuItem onClick={deleteAddress}>삭제</MenuItem>
           </Menu>
         )}
       </>

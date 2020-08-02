@@ -222,11 +222,27 @@ class Address extends Component {
 
   changeDefaultAddress = (id) => {
     this.setState({ defaultAddressID: id });
+
+    // TODO: show toast
+  };
+  deleteAddress = (id) => {
+    const { addresses, defaultAddressID } = this.state;
+    const findtarget = addresses.find((address) => address.id === id);
+    const filteredAddresses = addresses.filter((address) => address.id !== id);
+
+    if (findtarget.id === defaultAddressID) {
+      // TODO: show toast not delete
+      console.log('limit delete address');
+      return;
+    }
+    this.setState({ addresses: filteredAddresses });
+
+    // TODO: show toast
   };
 
   render() {
     const { addresses, defaultAddressID, more, modal } = this.state;
-    const { changeMore, changeDefaultAddress } = this;
+    const { changeMore, changeDefaultAddress, deleteAddress } = this;
     return (
       <Wrapper>
         <ToolBox>
@@ -240,6 +256,7 @@ class Address extends Component {
             more={more}
             onClickMoreBtn={changeMore}
             updateDefaultAddress={changeDefaultAddress}
+            deleteAddress={deleteAddress}
           />
           <MostQuestion />
         </Contents>

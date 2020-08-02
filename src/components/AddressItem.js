@@ -98,6 +98,7 @@ const AddressItem = ({
   address,
   isbase,
   updateDefaultAddress,
+  deleteAddress,
 }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   return (
@@ -114,6 +115,7 @@ const AddressItem = ({
           visible={menuVisible}
           hideMenu={() => setMenuVisible(false)}
           updateAddress={updateDefaultAddress}
+          deleteAddress={deleteAddress}
         />
       </MenuBtn>
     </Wrapper>
@@ -126,6 +128,7 @@ AddressItem.propTypes = {
   address: PropTypes.string.isRequired,
   isbase: PropTypes.bool.isRequired,
   updateDefaultAddress: PropTypes.func.isRequired,
+  deleteAddress: PropTypes.func.isRequired,
 };
 
 export { AddressItem, MoreItem };
