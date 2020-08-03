@@ -222,8 +222,8 @@ class Address extends Component {
 
   changeDefaultAddress = (id) => {
     this.setState({ defaultAddressID: id });
-
-    // TODO: show toast
+    // TODO: toast message 수정 필요
+    this.toastRef.current.showMessage('기본 배송지가 변경되었습니다.');
   };
   deleteAddress = (id) => {
     const { addresses, defaultAddressID } = this.state;
@@ -231,13 +231,10 @@ class Address extends Component {
     const filteredAddresses = addresses.filter((address) => address.id !== id);
 
     if (findtarget.id === defaultAddressID) {
-      // TODO: show toast not delete
       console.log('limit delete address');
       return;
     }
     this.setState({ addresses: filteredAddresses });
-
-    // TODO: show toast
   };
 
   render() {
@@ -261,6 +258,7 @@ class Address extends Component {
           <MostQuestion />
         </Contents>
         <Dimmed visible={modal.visible} />
+        <Toast ref={this.toastRef} />
       </Wrapper>
     );
   }
