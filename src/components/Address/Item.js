@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import media from 'util/media';
 import { MdMoreHoriz } from 'react-icons/md';
 
-import AddressItemMenu from 'components/AddressItemMenu';
+import AddressItemMenu from 'components/Address/ItemMenu';
 
 const Wrapper = styled.div`
   display: flex;

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import media from 'util/media';
 
-import AddressList from 'components/AddressList';
-import MostQuestion from 'components/MostQuestion';
-import Dimmed from 'components/Dimmed';
-import Toast from 'components/Toast';
-import ModalWindow from 'components/ModalWindow';
+import AddressList from 'components/Address/List';
+import MostQuestion from 'components/Address/MostQuestion';
+import Toast from 'components/Base/Toast';
+import Dimmed from 'components/Base/Dimmed';
+import ModalWindow from 'components/Window/ModalWindow';
 
 const Wrapper = styled.div`
   ${media.wrapper}
@@ -257,7 +257,7 @@ class Address extends Component {
 
   changeDefaultAddress = (id) => {
     this.setState({ defaultAddressID: id });
-    // TODO: toast message 수정 필요
+    // TODO: toast message 최적화 필요
     this.toastRef.current.showMessage('기본 배송지가 변경되었습니다.');
   };
   deleteAddress = (id) => {

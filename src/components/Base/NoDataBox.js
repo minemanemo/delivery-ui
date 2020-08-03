@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import IconView from 'components/IconView';
+import IconView from 'components/Base/IconView';
 import media from 'util/media';
 
 const Wrapper = styled.div`

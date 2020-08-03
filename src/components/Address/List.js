@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import NoDataBox from 'components/NoDataBox';
+import NoDataBox from 'components/Base/NoDataBox';
 
 import media from 'util/media';
 
-import { AddressItem, MoreItem } from 'components/AddressItem';
+import { AddressItem, MoreItem } from 'components/Address/Item';
 
 const Wrapper = styled.div`
   ${media.mobile`

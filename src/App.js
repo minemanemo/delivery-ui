@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import Header from 'components/Header';
-import DivisionLine from 'components/DivisionLine';
-import TabNavigator from 'components/TabNavigator';
-import TabItem from 'components/TabItem';
-
-import BanBox from 'components/BanBox';
-import Address from 'components/Address';
+import Header from 'components/Base/Header';
+import DivisionLine from 'components/Base/DivisionLine';
+import TabNavigator from 'components/Base/TabNavigator';
+import TabItem from 'components/Base/TabItem';
+import BanBox from 'components/Base/BanBox';
+import Address from 'containers/Address';
 
 class App extends Component {
   state = {

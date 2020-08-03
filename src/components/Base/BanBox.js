@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaBan } from 'react-icons/fa';
 import styled from 'styled-components';
-import IconView from 'components/IconView';
+import IconView from 'components/Base/IconView';
 
 const Wrapper = styled.div`
   min-width: 360px;
